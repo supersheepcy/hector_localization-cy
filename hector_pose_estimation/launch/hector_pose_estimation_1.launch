@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find mavros)/launch/px4.launch"/>
+  <include file="$(find hector_mapping)/launch/mapping_default.launch"/>
+  <node pkg="hector_pose_estimation" type="pose_estimation" name="hector_pose_estimation">
+    <remap from="raw_imu" to="/mavros/imu/data_raw" />
+    <remap from="magnetic" to="/mavros/imu/mag" />
+  </node>
+  <node pkg="rviz" type="rviz" name="hector_pose_estimation_rviz" args="-d $(find hector_pose_estimation)/rviz_cfg/hector_pose_estimation.rviz" />
+</launch>
